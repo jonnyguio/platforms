@@ -7,3 +7,9 @@
 SOURCE_DIR=/var/lib/tsuru
 source ${SOURCE_DIR}/base/rc/config
 
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+chown -R ${USER}:${USER} ${HOME}/.cargo ${HOME}/.rustup ${HOME}/.multirust
+
+apt-get update
+apt-get install -y --no-install-recommends build-essential

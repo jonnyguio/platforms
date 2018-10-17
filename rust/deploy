@@ -8,3 +8,16 @@ SOURCE_DIR=/var/lib/tsuru
 source ${SOURCE_DIR}/base/deploy
 source ${SOURCE_DIR}/base/rc/config
 
+if [ -f ${CURRENT_DIR}/rust-toolchain ]; then
+    RUST_TOOLCHAIN=$(cat ${CURRENT_DIR}/.rust-toolchain)
+fi
+
+if [ -z $(find ${CURRENT_DIR} -name "Cargo.toml" -print) ]; then
+    exit 0
+fi
+
+pushd ${CURRENT_DIR} >/dev/null 2>&1
+
+cargo build --release
+
+popd >/dev/null 2>&1
